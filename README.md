@@ -11,7 +11,7 @@ I am a Computer Science student with a strong foundation in algorithms and syste
 - ⚡ **Goal:** Seeking a summer internship to gain hands-on experience, learn industry-standard software engineering practices from experienced teams, and contribute to impactful projects.
 
 ### 🛠️ Tech Stack & Core Skills
-- **Languages:** Java, Python, C++, C, Assembly (RISC-V), Prolog
+- **Languages:** Java, Python, C++, C, Assembly (RISC-V)
 - **Exploring:** Go, Rust
 - **Core Concepts:** Data Structures & Algorithms, Object-Oriented Programming (OOP), Systems Programming
 - **Tools:** Git, Linux/UNIX environments
