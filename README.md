@@ -1,6 +1,6 @@
 # Hi there, I'm João Rodrigues 👋
 
-🎓 **Computer Science Student** @ [IST (ULisboa)](https://tecnico.ulisboa.pt/)
+🎓 **Computer Science and Engineering Student** @ [IST (ULisboa)](https://tecnico.ulisboa.pt/)
 
 I am a Computer Science student with a strong foundation in algorithms and systems architecture, eager to dive deeper into **Software Engineering**. I enjoy tackling complex computational problems and understanding how things work under the hood, from low-level system performance to higher-level application logic.
 
