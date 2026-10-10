@@ -12,7 +12,7 @@ I am a Computer Science student with a strong foundation in algorithms and syste
 
 ### 🛠️ Tech Stack & Core Skills
 - **Languages:** Java, Python, C++, C, Assembly (RISC-V)
-- **Exploring:** Go, Rust
+- **Exploring:** Go, Rust, TypeScript
 - **Core Concepts:** Data Structures & Algorithms, Object-Oriented Programming (OOP), Systems Programming
 - **Tools:** Git, Linux/UNIX environments
 
