@@ -9,7 +9,7 @@ I'm interested in **Software Engineering, Backend Development, and Computer Syst
 - 🏆 **1st Place — AInnovation Hackathon 2026**, where my team developed *Caixa Explica*, an AI-powered financial literacy assistant.
 - 💻 Interested in backend engineering, systems programming, cloud technologies, and AI.
 - 🦀 Currently improving my Rust skills while building projects and exploring new technologies.
-- 🎯 Open to **Software Engineering internships for Summer 2027**, including international and remote opportunities.
+- 🎯 Open to **Summer 2027 Internships**, including international and remote opportunities.
 
 ## Featured Projects
 
