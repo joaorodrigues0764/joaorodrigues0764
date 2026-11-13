@@ -35,7 +35,7 @@ A REST API built with Rust, featuring asynchronous request handling and PostgreS
 
 **Languages**
 
-`Rust` `Python` `C` `C++` `Java` `TypeScript` `SQL` `RISC-V Assembly`
+`Rust` `Python` `C` `C++` `Java` `TypeScript` `SQL` `RISC-V Assembly` `Prolog`
 
 **Backend & Cloud**
 
