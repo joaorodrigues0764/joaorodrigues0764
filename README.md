@@ -1,3 +1,11 @@
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="dark_mode.svg">
+    <source media="(prefers-color-scheme: light)" srcset="light_mode.svg">
+    <img alt="João Rodrigues — ASCII portrait and profile info" src="dark_mode.svg">
+  </picture>
+</p>
+
 # Hi, I'm João Rodrigues 👋
 
 🎓 Computer Science and Engineering student at [Instituto Superior Técnico](https://tecnico.ulisboa.pt/), University of Lisbon.
@@ -32,6 +40,10 @@ A REST API built with Rust, featuring asynchronous request handling and PostgreS
 **Tech:** `Rust` `Axum` `SQLx` `PostgreSQL` `Docker`
 
 ## Tech Stack
+
+<p>
+  <img src="https://skillicons.dev/icons?i=rust,py,c,cpp,java,ts,go,postgres,fastapi,cloudflare,docker,git,linux,github&perline=14" alt="Tech stack icons" />
+</p>
 
 **Languages**
 
