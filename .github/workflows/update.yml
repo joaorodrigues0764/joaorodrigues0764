@@ -1,11 +1,14 @@
 name: Update README
 
+# Generates the SVGs and publishes them to the "output" branch, so that
+# automated commits never land on main (and never show up as contributors).
 on:
   schedule:
     - cron: "17 4 * * *"   # daily
   workflow_dispatch:
   push:
-    paths: ["generate.py", "ascii.txt"]
+    branches: [main]
+    paths: ["generate.py", "ascii.txt", ".github/workflows/update.yml"]
 
 permissions:
   contents: write
@@ -23,10 +26,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           USERNAME: ${{ github.repository_owner }}
         run: python generate.py
-      - name: Commit
+      - name: Publish to output branch
         run: |
+          mkdir out && cp dark_mode.svg light_mode.svg out/
+          cd out
+          git init -q -b output
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add dark_mode.svg light_mode.svg
-          git diff --staged --quiet || git commit -m "Update profile stats"
-          git push
+          git add . && git commit -q -m "Update profile SVGs"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" output

@@ -1,8 +1,8 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="dark_mode.svg">
-    <source media="(prefers-color-scheme: light)" srcset="light_mode.svg">
-    <img alt="João Rodrigues — ASCII portrait and profile info" src="dark_mode.svg">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/dark_mode.svg">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/light_mode.svg">
+    <img alt="João Rodrigues — ASCII portrait and profile info" src="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/dark_mode.svg">
   </picture>
 </p>
 
