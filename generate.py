@@ -18,33 +18,38 @@ from html import escape
 
 # ============================== CONFIG ==============================
 USERNAME = os.environ.get("USERNAME", "joaorodrigues0764")
-HEADER = f"{USERNAME}@github"
 BIRTHDAY = date(2000, 1, 1)  # usado pelo placeholder "{uptime}" (não usado de momento)
 
-# (chave, valor). Use None como valor para criar um separador de secção.
-INFO = [
-    ("Name", "João Rodrigues"),
-    ("Host", "Instituto Superior Técnico"),
-    ("Degree", "Computer Science & Engineering"),
-    ("Focus", "Backend, Systems, Cloud, AI"),
-    ("Currently", "Improving my Rust skills"),
-    ("Status", "Open to Summer 2027 Internships"),
-    ("", ""),
-    ("Languages.Systems", "Rust, C, C++, Go, RISC-V Asm"),
-    ("Languages.General", "Python, Java, TypeScript, SQL"),
-    ("Backend.Cloud", "FastAPI, Axum, PostgreSQL, CF Workers"),
-    ("Tools", "Git, Linux, Docker, GitHub"),
-    ("Languages.Real", "Portuguese, English"),
-    ("— Achievements", None),
-    ("Hackathon", "1st Place, AInnovation 2026"),
-    ("Project", "Caixa Explica (AI fin. literacy)"),
-    ("— Contact", None),
-    ("Email", "joao.sousa.rodrigues@tecnico.ulisboa.pt"),
-    ("LinkedIn", "in/joão-rodrigues-9b02562b1"),
-    ("— GitHub Stats", None),
-    ("Repos", "{repos}   |  Stars: {stars}"),
-    ("Followers", "{followers}  |  Commits: {commits}"),
+# Painel da direita: um terminal a correr "cargo run".
+# Cada linha é uma lista de (classe, texto). Classes: g=verde, y=amarelo, b=azul,
+# w=branco forte, m=cinzento, o=laranja, r=cor de Rust, v=normal. [] = linha vazia.
+# Placeholders disponíveis: {repos} {stars} {followers} {commits}
+COMMAND = "cargo run --release --bin joao"
+LINES = [
+    [("g", "   Compiling"), ("v", " ist-cse v1.0.0 "), ("m", "(Instituto Superior Técnico)")],
+    [("g", "   Compiling"), ("v", " systems v0.7.0 "), ("m", "(rust, c, c++, go, risc-v)")],
+    [("g", "   Compiling"), ("v", " backend v0.9.0 "), ("m", "(fastapi, axum, postgresql)")],
+    [("g", "   Compiling"), ("v", " cloud v0.8.0 "), ("m", "(cf workers, docker, linux)")],
+    [("g", "   Compiling"), ("v", " ai v0.6.0 "), ("m", "(python, rag, llms)")],
+    [],
+    [("y", "warning"), ("w", ": `rust_skills` is still being improved")],
+    [("b", "  -->"), ("v", " src/joao.rs:2026:11")],
+    [("b", "   ="), ("w", " note"), ("v", ": this is intentional, keep shipping")],
+    [],
+    [("g", "    Finished"), ("v", " `release` profile [optimized]"), ("m", "{stats}")],
+    [("g", "     Running"), ("v", " `target/release/joao`")],
+    [],
+    [("o", "Hi, I'm João Rodrigues!")],
+    [("v", "Backend, systems, cloud & AI @ IST Lisbon.")],
+    [],
+    [("r", "★"), ("v", " 1st place · AInnovation Hackathon 2026")],
+    [("m", "  └─ Caixa Explica, AI for financial literacy")],
+    [("g", "●"), ("v", " Open to summer 2027 internships")],
+    [],
+    [("m", "✉ "), ("b", "joao.sousa.rodrigues@tecnico.ulisboa.pt")],
+    [("m", "in "), ("b", "linkedin.com/in/joão-rodrigues-9b02562b1")],
 ]
+TITLE = "joao@ist: ~/profile"
 
 # Animação
 ROW_TIME = 0.045      # segundos que o cursor demora a varrer cada linha
@@ -52,17 +57,18 @@ START_DELAY = 0.4     # pausa antes de começar
 # ====================================================================
 
 THEMES = {
-    "dark": dict(bg="#161b22", art="#c9d1d9", key="#ffa657", val="#a5d6ff",
-                 head="#ff7b72", dim="#616e7f", cursor_fill="#ffffff", cursor_stroke="#000000"),
-    "light": dict(bg="#f6f8fa", art="#24292f", key="#953800", val="#0a3069",
-                  head="#cf222e", dim="#8c959f", cursor_fill="#000000", cursor_stroke="#ffffff"),
+    "dark": dict(bg="#161b22", art="#c9d1d9", cursor_fill="#ffffff", cursor_stroke="#000000", term_border="#30363d"),
+    "light": dict(bg="#f6f8fa", art="#24292f", cursor_fill="#000000", cursor_stroke="#ffffff", term_border="#d0d7de"),
 }
+# O terminal é escuro nos dois temas.
+TERM = dict(bg="#0d1117", bar="#21262d", text="#c9d1d9", title="#8b949e")
 
 # Geometria da arte (forçada com textLength, por isso não depende da fonte)
 ART_FS, ART_CW, ART_LH = 7.8, 4.7, 8.9
 PAD = 20
-INFO_FS, INFO_CW, INFO_LH = 15.0, 9.0, 21.0
-INFO_COLS = 58
+INFO_FS, INFO_CW, INFO_LH = 15.0, 9.0, 25.0
+INFO_COLS = 60
+BAR_H = 36
 FONT = "ConsolasFallback, Consolas, 'DejaVu Sans Mono', Menlo, 'Courier New', monospace"
 
 
@@ -112,22 +118,29 @@ def build(theme, art_lines, values):
     c = THEMES[theme]
     art_w = max(len(l) for l in art_lines) * ART_CW
     art_h = len(art_lines) * ART_LH
-    info_x = PAD + art_w + 30
-    width = int(info_x + INFO_COLS * INFO_CW + PAD)
-    height = int(max(art_h, (len(INFO) + 2) * INFO_LH) + 2 * PAD)
+    panel_x = PAD + art_w + 30
+    text_x = panel_x + 22
+    width = int(text_x + INFO_COLS * INFO_CW + 22 + PAD)
+    rows = sum(1 if l else 0.6 for l in LINES) + 4  # comando + prompt final + margens
+    height = int(max(art_h, BAR_H + rows * INFO_LH) + 2 * PAD)
 
     out = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
            f'viewBox="0 0 {width} {height}" font-family="{FONT}">']
     total_art = START_DELAY + len(art_lines) * ROW_TIME
     out.append(f"""<style>
   .art {{ fill:{c['art']}; font-size:{ART_FS}px; white-space:pre; }}
-  .info {{ font-size:{INFO_FS}px; white-space:pre; opacity:0;
-           animation: in .35s ease-out forwards; }}
-  .k {{ fill:{c['key']}; }} .v {{ fill:{c['val']}; }} .h {{ fill:{c['head']}; font-weight:bold; }}
-  .d {{ fill:{c['dim']}; }}
-  @keyframes in {{ from {{ opacity:0; transform:translateX(-8px); }} to {{ opacity:1; transform:none; }} }}
+  .info {{ font-size:{INFO_FS}px; white-space:pre; fill:{TERM['text']}; opacity:0;
+           animation: in .3s ease-out forwards; }}
+  .cmd {{ font-size:{INFO_FS}px; white-space:pre; fill:{TERM['text']}; }}
+  .ttl {{ font-size:13px; fill:{TERM['title']}; }}
+  .g {{ fill:#3fb950; font-weight:bold; }} .y {{ fill:#d29922; font-weight:bold; }}
+  .b {{ fill:#58a6ff; }} .w {{ fill:#f0f6fc; font-weight:bold; }} .m {{ fill:#8b949e; }}
+  .o {{ fill:#f0883e; font-weight:bold; }} .r {{ fill:#dea584; }} .v {{ fill:{TERM['text']}; }}
+  @keyframes in {{ from {{ opacity:0; transform:translateY(4px); }} to {{ opacity:1; transform:none; }} }}
   #cursor {{ animation: hide .3s {total_art + 0.3:.2f}s forwards; }}
   @keyframes hide {{ to {{ opacity:0; }} }}
+  @keyframes on {{ to {{ opacity:1; }} }}
+  @keyframes blink {{ 0% {{ opacity:1; }} 50% {{ opacity:0; }} }}
 </style>""")
     out.append(f'<rect width="{width}" height="{height}" rx="15" fill="{c["bg"]}"/>')
 
@@ -157,27 +170,52 @@ def build(theme, art_lines, values):
     out.append("<defs>" + "".join(defs) + "</defs>")
     out.extend(texts)
 
-    # ---- painel de informação ----
-    y = PAD + INFO_LH
-    delay = total_art * 0.25  # começa a aparecer enquanto a arte ainda está a ser desenhada
-    step = (total_art * 0.75) / len(INFO)
+    # ---- terminal "cargo run" ----
+    ph = height - 2 * PAD
+    out.append(f'<rect x="{panel_x}" y="{PAD}" width="{width - PAD - panel_x}" height="{ph}" rx="10" '
+               f'fill="{TERM["bg"]}" stroke="{c["term_border"]}"/>')
+    out.append(f'<path d="M{panel_x + 10} {PAD} H{width - PAD - 10} A10 10 0 0 1 {width - PAD} {PAD + 10} '
+               f'V{PAD + BAR_H} H{panel_x} V{PAD + 10} A10 10 0 0 1 {panel_x + 10} {PAD} Z" fill="{TERM["bar"]}"/>')
+    for i, col in enumerate(["#ff5f56", "#ffbd2e", "#27c93f"]):
+        out.append(f'<circle cx="{panel_x + 20 + i * 20}" cy="{PAD + BAR_H / 2}" r="6" fill="{col}"/>')
+    out.append(f'<text class="ttl" x="{(panel_x + width - PAD) / 2:.1f}" y="{PAD + BAR_H / 2 + 4.5:.1f}" '
+               f'text-anchor="middle">{escape(TITLE)}</text>')
+
+    # comando escrito letra a letra
+    y = PAD + BAR_H + INFO_LH + 8
+    n = len(COMMAND)
+    cmd_x = text_x + 2 * INFO_CW
+    t_start, t_type = 0.3, 1.1
+    vals = ";".join(f"{k * INFO_CW:.1f}" for k in range(n + 1))
+    keys = ";".join(f"{k / n:.4f}" for k in range(n + 1))
+    out.append(f'<clipPath id="cmdclip"><rect x="{cmd_x:.1f}" y="{y - INFO_LH:.1f}" width="0" height="{INFO_LH + 6}">'
+               f'<animate attributeName="width" values="{vals}" keyTimes="{keys}" calcMode="discrete" '
+               f'begin="{t_start}s" dur="{t_type}s" fill="freeze"/></rect></clipPath>')
+    out.append(f'<text class="cmd" x="{text_x:.1f}" y="{y:.1f}"><tspan class="g">❯</tspan></text>')
+    out.append(f'<text class="cmd" x="{cmd_x:.1f}" y="{y:.1f}" clip-path="url(#cmdclip)">'
+               f'<tspan class="w">{escape(COMMAND.split(" ")[0])}</tspan> {escape(" ".join(COMMAND.split(" ")[1:]))}</text>')
 
     def line(svg_inner, d):
-        out.append(f'<text class="info" x="{info_x:.1f}" y="{y:.1f}" style="animation-delay:{d:.2f}s">{svg_inner}</text>')
+        out.append(f'<text class="info" x="{text_x:.1f}" y="{y:.1f}" style="animation-delay:{d:.2f}s">{svg_inner}</text>')
 
-    line(f'<tspan class="h">{escape(HEADER)}</tspan> <tspan class="d">{"—" * (INFO_COLS - len(HEADER) - 1)}</tspan>', delay)
-    for k, v in INFO:
+    delay = t_start + t_type + 0.4
+    step = max(total_art - delay, 1.5) / len(LINES)
+    y += 8
+    for segs in LINES:
         y += INFO_LH
+        if not segs:
+            y -= INFO_LH * 0.4  # linhas vazias ocupam menos espaço
+            continue
         delay += step
-        if v is None:  # separador de secção
-            line(f'<tspan class="h">{escape(k)}</tspan> <tspan class="d">{"—" * (INFO_COLS - len(k) - 1)}</tspan>', delay)
-            continue
-        if not k:
-            continue
-        v = v.format(**values)
-        dots = "." * max(1, INFO_COLS - len(k) - len(v) - 4)
-        line(f'<tspan class="d">. </tspan><tspan class="k">{escape(k)}</tspan><tspan class="d">:{dots} </tspan>'
-             f'<tspan class="v">{escape(v)}</tspan>', delay)
+        inner = "".join(f'<tspan class="{k}">{escape(t.format(**values))}</tspan>' for k, t in segs)
+        line(inner, delay)
+
+    # prompt final com cursor a piscar
+    y += INFO_LH * 1.4
+    delay += step + 0.2
+    line('<tspan class="g">❯</tspan>', delay)
+    out.append(f'<rect style="opacity:0;animation:on .01s {delay:.2f}s forwards, blink 1s step-end {delay + 0.5:.2f}s infinite" x="{text_x + 2 * INFO_CW:.1f}" y="{y - INFO_LH * 0.72:.1f}" '
+               f'width="{INFO_CW:.1f}" height="{INFO_LH * 0.85:.1f}" fill="{TERM["text"]}"/>')
 
     # ---- cursor do rato ----
     dur = cursor_pts[-1][0] + 0.2
@@ -199,7 +237,9 @@ def main():
     here = os.path.dirname(os.path.abspath(__file__))
     with open(os.path.join(here, "ascii.txt"), encoding="utf-8") as f:
         art = f.read().rstrip("\n").split("\n")
-    values = dict(uptime=uptime(), **github_stats())
+    stats = github_stats()
+    extra = f" · {stats['commits']} commits" if isinstance(stats["commits"], int) else ""
+    values = dict(uptime=uptime(), stats=extra, **stats)
     for theme in THEMES:
         with open(os.path.join(here, f"{theme}_mode.svg"), "w", encoding="utf-8") as f:
             f.write(build(theme, art, values))
