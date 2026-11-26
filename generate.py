@@ -51,10 +51,10 @@ START_DELAY = 0.4     # pausa antes de começar
 # ====================================================================
 
 THEMES = {
-    "dark": dict(bg="#161b22", art="#FF2E43", cursor_fill="#ffffff", cursor_stroke="#000000", term_border="#30363d"),
-    "light": dict(bg="#f6f8fa", art="#D7263D", cursor_fill="#000000", cursor_stroke="#ffffff", term_border="#d0d7de"),
+    "dark": dict(bg="#161b22", art="#39D353", cursor_fill="#ffffff", cursor_stroke="#000000", term_border="#30363d"),
+    "light": dict(bg="#f6f8fa", art="#1A7F37", cursor_fill="#000000", cursor_stroke="#ffffff", term_border="#d0d7de"),
 }
-# O terminal é escuro nos dois temas. Cor de destaque: vermelho #FF2E43.
+# O terminal é escuro nos dois temas. Cor de destaque: verde #39D353.
 TERM = dict(bg="#0d1117", bar="#21262d", text="#c9d1d9", title="#8b949e")
 
 # Geometria da arte (forçada com textLength, por isso não depende da fonte)
@@ -127,9 +127,9 @@ def build(theme, art_lines, values):
            animation: in .3s ease-out forwards; }}
   .cmd {{ font-size:{INFO_FS}px; white-space:pre; fill:{TERM['text']}; }}
   .ttl {{ font-size:13px; fill:{TERM['title']}; }}
-  .g {{ fill:#FF2E43; font-weight:bold; }} .y {{ fill:#d29922; font-weight:bold; }}
-  .b {{ fill:#FF2E43; }} .w {{ fill:#f0f6fc; font-weight:bold; }} .m {{ fill:#8b949e; }}
-  .o {{ fill:#FF2E43; font-weight:bold; }} .r {{ fill:#FF2E43; }} .v {{ fill:{TERM['text']}; }}
+  .g {{ fill:#39D353; font-weight:bold; }} .y {{ fill:#d29922; font-weight:bold; }}
+  .b {{ fill:#39D353; }} .w {{ fill:#f0f6fc; font-weight:bold; }} .m {{ fill:#8b949e; }}
+  .o {{ fill:#39D353; font-weight:bold; }} .r {{ fill:#39D353; }} .v {{ fill:{TERM['text']}; }}
   @keyframes in {{ from {{ opacity:0; transform:translateY(4px); }} to {{ opacity:1; transform:none; }} }}
   #cursor {{ animation: hide .3s {total_art + 0.3:.2f}s forwards; }}
   @keyframes hide {{ to {{ opacity:0; }} }}
@@ -229,20 +229,20 @@ def build(theme, art_lines, values):
 # ===================== CONTACTO: botões (topo) =====================
 EMAIL = "joao.sousa.rodrigues@tecnico.ulisboa.pt"
 LINKEDIN = "linkedin.com/in/joão-rodrigues-9b02562b1"
-ICON_IN = lambda x, y, s: (f'<rect x="{x}" y="{y}" width="{s}" height="{s}" rx="4" fill="#FF2E43"/>'
+ICON_IN = lambda x, y, s: (f'<rect x="{x}" y="{y}" width="{s}" height="{s}" rx="4" fill="#39D353"/>'
                            f'<text x="{x + s / 2}" y="{y + s * 0.76}" font-size="{s * 0.62}" font-weight="bold" '
                            f'fill="#fff" text-anchor="middle" font-family="Arial, Helvetica, sans-serif">in</text>')
 ICON_MAIL = lambda x, y, s: (f'<rect x="{x + 0.75}" y="{y + s * 0.18}" width="{s - 1.5}" height="{s * 0.64}" rx="3" '
-                             f'fill="none" stroke="#FF2E43" stroke-width="1.8"/>'
+                             f'fill="none" stroke="#39D353" stroke-width="1.8"/>'
                              f'<path d="M{x + 2} {y + s * 0.24} L{x + s / 2} {y + s * 0.56} L{x + s - 2} {y + s * 0.24}" '
-                             f'fill="none" stroke="#FF2E43" stroke-width="1.8" stroke-linejoin="round"/>')
+                             f'fill="none" stroke="#39D353" stroke-width="1.8" stroke-linejoin="round"/>')
 # Documento com o canto dobrado e linhas de texto (botão do CV)
 ICON_CV = lambda x, y, s: (f'<path d="M{x + s * 0.18} {y + 1} H{x + s * 0.62} L{x + s * 0.84} {y + s * 0.24} V{y + s - 1} '
-                           f'H{x + s * 0.18} Z" fill="none" stroke="#FF2E43" stroke-width="1.8" stroke-linejoin="round"/>'
-                           f'<path d="M{x + s * 0.62} {y + 1} V{y + s * 0.24} H{x + s * 0.84}" fill="none" stroke="#FF2E43" '
+                           f'H{x + s * 0.18} Z" fill="none" stroke="#39D353" stroke-width="1.8" stroke-linejoin="round"/>'
+                           f'<path d="M{x + s * 0.62} {y + 1} V{y + s * 0.24} H{x + s * 0.84}" fill="none" stroke="#39D353" '
                            f'stroke-width="1.8" stroke-linejoin="round"/>'
                            + "".join(f'<line x1="{x + s * 0.32}" y1="{y + s * f}" x2="{x + s * 0.70}" y2="{y + s * f}" '
-                                     f'stroke="#FF2E43" stroke-width="1.6" stroke-linecap="round"/>' for f in (0.48, 0.64, 0.80)))
+                                     f'stroke="#39D353" stroke-width="1.6" stroke-linecap="round"/>' for f in (0.48, 0.64, 0.80)))
 
 
 def build_button(label, icon):
