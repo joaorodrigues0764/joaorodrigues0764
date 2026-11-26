@@ -40,7 +40,7 @@ LINES = [
     [K("Award"), ("r", "★ "), ("v", "1st place · Hackathon 2026")],
     [K("Status"), ("g", "● "), ("v", "Open to summer 2027 internships · Grad. 2028")],
     [],
-    [K("Email"), ("v", "joao.sousa.rodrigues@tecnico.ulisboa.pt")],
+    [K("E-mail"), ("v", "joao.sousa.rodrigues@tecnico.ulisboa.pt")],
     [K("LinkedIn"), ("v", "in/joão-rodrigues-9b02562b1")],
 ]
 TITLE = "joao@ist: ~/profile"
