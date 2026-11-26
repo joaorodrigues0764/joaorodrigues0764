@@ -236,13 +236,13 @@ ICON_MAIL = lambda x, y, s: (f'<rect x="{x + 0.75}" y="{y + s * 0.18}" width="{s
                              f'fill="none" stroke="#EA4335" stroke-width="1.8"/>'
                              f'<path d="M{x + 2} {y + s * 0.24} L{x + s / 2} {y + s * 0.56} L{x + s - 2} {y + s * 0.24}" '
                              f'fill="none" stroke="#EA4335" stroke-width="1.8" stroke-linejoin="round"/>')
-# Documento com o canto dobrado e linhas de texto (botão do CV)
+# Documento com o canto dobrado e linhas de texto (botão do CV, a cinzento)
 ICON_CV = lambda x, y, s: (f'<path d="M{x + s * 0.18} {y + 1} H{x + s * 0.62} L{x + s * 0.84} {y + s * 0.24} V{y + s - 1} '
-                           f'H{x + s * 0.18} Z" fill="none" stroke="#3FB950" stroke-width="1.8" stroke-linejoin="round"/>'
-                           f'<path d="M{x + s * 0.62} {y + 1} V{y + s * 0.24} H{x + s * 0.84}" fill="none" stroke="#3FB950" '
+                           f'H{x + s * 0.18} Z" fill="none" stroke="#8B949E" stroke-width="1.8" stroke-linejoin="round"/>'
+                           f'<path d="M{x + s * 0.62} {y + 1} V{y + s * 0.24} H{x + s * 0.84}" fill="none" stroke="#8B949E" '
                            f'stroke-width="1.8" stroke-linejoin="round"/>'
                            + "".join(f'<line x1="{x + s * 0.32}" y1="{y + s * f}" x2="{x + s * 0.70}" y2="{y + s * f}" '
-                                     f'stroke="#3FB950" stroke-width="1.6" stroke-linecap="round"/>' for f in (0.48, 0.64, 0.80)))
+                                     f'stroke="#8B949E" stroke-width="1.6" stroke-linecap="round"/>' for f in (0.48, 0.64, 0.80)))
 
 
 def build_button(label, icon):
@@ -259,7 +259,7 @@ def main():
     here = os.path.dirname(os.path.abspath(__file__))
     for name, svg in [("btn_linkedin", build_button("LinkedIn", ICON_IN)),
                       ("btn_email", build_button("Email", ICON_MAIL)),
-                      ("btn_resume", build_button("Resume", ICON_CV))]:
+                      ("btn_resume", build_button("CV", ICON_CV))]:
         with open(os.path.join(here, f"{name}.svg"), "w", encoding="utf-8") as f:
             f.write(svg)
     with open(os.path.join(here, "ascii.txt"), encoding="utf-8") as f:
