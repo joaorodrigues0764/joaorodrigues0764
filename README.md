@@ -32,5 +32,3 @@ I like understanding how things work under the hood and building software that g
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/github-snake.svg">
   <img alt="Contribution graph being eaten by a snake" src="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/github-snake-dark.svg" width="100%">
 </picture>
-
-<p align="center"><sub><code>Finished in 0.42s · compiled with ☕ and rustc</code></sub></p>
