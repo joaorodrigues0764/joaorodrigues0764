@@ -11,8 +11,6 @@
   <a href="mailto:joao.sousa.rodrigues@tecnico.ulisboa.pt"><img src="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/btn_email.svg" alt="Email" height="44"></a>
 </p>
 
-I like understanding how things work under the hood and building software that goes beyond the classroom.
-
 <p align="center">
   <img src="https://skillicons.dev/icons?i=rust,c,cpp,go,py,java,ts,postgres,fastapi,cloudflare,docker,linux,git&theme=dark" alt="Rust, C, C++, Go, Python, Java, TypeScript, PostgreSQL, FastAPI, Cloudflare, Docker, Linux, Git">
 </p>
@@ -29,8 +27,8 @@ I like understanding how things work under the hood and building software that g
 <br>
 
 - 🥋 Karate since age 6 · **2nd Dan black belt** (JKF Gojukai) · instructor
-- 🏃 Always doing some kind of sport
+- 🏃 I love sports and I'm always on the move.
 - 🧩 I like solving problems, the harder the better
-- 🐧 Linux user
+- 🐧 Daily driver: Linux.
 
 </details>
