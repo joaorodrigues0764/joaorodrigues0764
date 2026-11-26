@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ["generate.py", "tweak_3d.py", "ascii.txt", ".github/workflows/update.yml", "README.md"]
+    paths: ["generate.py", "tweak_3d.py", "3d_settings.json", "ascii.txt", ".github/workflows/update.yml", "README.md"]
 
 permissions:
   contents: write
@@ -31,11 +31,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           USERNAME: ${{ github.repository_owner }}
+          SETTING_JSON: 3d_settings.json
       - name: Tweak 3D graph (show "Last Year", drop stars and forks)
-        run: python tweak_3d.py profile-3d-contrib/profile-night-rainbow.svg profile-3d-contrib/profile-green-animate.svg
+        run: python tweak_3d.py profile-3d-contrib/profile-red-dark.svg profile-3d-contrib/profile-red-light.svg
       - name: Publish to output branch
         run: |
-          mkdir out && cp dark_mode.svg light_mode.svg btn_*.svg profile-3d-contrib/profile-night-rainbow.svg profile-3d-contrib/profile-green-animate.svg out/
+          mkdir out && cp dark_mode.svg light_mode.svg btn_*.svg profile-3d-contrib/profile-red-dark.svg profile-3d-contrib/profile-red-light.svg out/
           cd out
           git init -q -b output
           git config user.name "github-actions[bot]"

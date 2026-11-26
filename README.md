@@ -17,9 +17,9 @@
 </p>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/profile-night-rainbow.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/profile-green-animate.svg">
-  <img alt="3D contribution graph for the last year, with top languages and activity overview" src="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/profile-night-rainbow.svg" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/profile-red-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/profile-red-light.svg">
+  <img alt="3D contribution graph for the last year, with top languages and activity overview" src="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/profile-red-dark.svg" width="100%">
 </picture>
 
 <details>
