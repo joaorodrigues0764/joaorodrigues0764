@@ -245,21 +245,27 @@ ICON_CV = lambda x, y, s: (f'<path d="M{x + s * 0.18} {y + 1} H{x + s * 0.62} L{
                                      f'stroke="#8B949E" stroke-width="1.6" stroke-linecap="round"/>' for f in (0.48, 0.64, 0.80)))
 
 
+BUTTON_LABELS = ["LinkedIn", "E-mail", "CV"]
+
+
 def build_button(label, icon):
+    """Botão com largura fixa (igual para todos); ícone + texto centrados."""
     cw, h = 8.4, 44
-    w = int(20 + 22 + 10 + len(label) * cw + 20)
+    w = int(20 + 22 + 10 + max(len(l) for l in BUTTON_LABELS) * cw + 20)
+    content = 22 + 10 + len(label) * cw
+    ix = (w - content) / 2
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" font-family="{FONT}">'
             f'<rect x="0.5" y="0.5" width="{w - 1}" height="{h - 1}" rx="10" fill="#0d1117" stroke="#30363d"/>'
-            + icon(20, 11, 22) +
-            f'<text x="52" y="27.5" font-size="14" font-weight="bold" fill="#c9d1d9" textLength="{len(label) * cw}" '
+            + icon(ix, 11, 22) +
+            f'<text x="{ix + 32:.1f}" y="27.5" font-size="14" font-weight="bold" fill="#c9d1d9" textLength="{len(label) * cw:.1f}" '
             f'lengthAdjust="spacingAndGlyphs">{escape(label)}</text></svg>')
 
 
 def main():
     here = os.path.dirname(os.path.abspath(__file__))
-    for name, svg in [("btn_linkedin", build_button("LinkedIn", ICON_IN)),
-                      ("btn_email", build_button("Email", ICON_MAIL)),
-                      ("btn_resume", build_button("CV", ICON_CV))]:
+    for name, svg in [("btn_linkedin", build_button(BUTTON_LABELS[0], ICON_IN)),
+                      ("btn_email", build_button(BUTTON_LABELS[1], ICON_MAIL)),
+                      ("btn_resume", build_button(BUTTON_LABELS[2], ICON_CV))]:
         with open(os.path.join(here, f"{name}.svg"), "w", encoding="utf-8") as f:
             f.write(svg)
     with open(os.path.join(here, "ascii.txt"), encoding="utf-8") as f:
