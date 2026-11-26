@@ -28,7 +28,7 @@ jobs:
         run: python generate.py
       - name: Publish to output branch
         run: |
-          mkdir out && cp dark_mode.svg light_mode.svg btn_*.svg stack.svg out/
+          mkdir out && cp dark_mode.svg light_mode.svg btn_*.svg out/
           cd out
           git init -q -b output
           git config user.name "github-actions[bot]"
