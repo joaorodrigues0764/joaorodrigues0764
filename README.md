@@ -18,7 +18,7 @@ I like understanding how things work under the hood and building software that g
 </p>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/github-snake-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/github-snake.svg">
-  <img alt="Contribution graph being eaten by a snake" src="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/github-snake-dark.svg" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/profile-night-rainbow.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/profile-green-animate.svg">
+  <img alt="3D contribution graph for the last year, with top languages and activity overview" src="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/profile-night-rainbow.svg" width="100%">
 </picture>
