@@ -280,7 +280,7 @@ def build_card(p):
     return "\n".join(o)
 
 
-# ===================== CONTACTO: botões (topo) + cartão "ping" (fim) =====================
+# ===================== CONTACTO: botões (topo) =====================
 EMAIL = "joao.sousa.rodrigues@tecnico.ulisboa.pt"
 LINKEDIN = "linkedin.com/in/joão-rodrigues-9b02562b1"
 ICON_IN = lambda x, y, s: (f'<rect x="{x}" y="{y}" width="{s}" height="{s}" rx="4" fill="#0A66C2"/>'
@@ -302,42 +302,10 @@ def build_button(label, icon):
             f'lengthAdjust="spacingAndGlyphs">{escape(label)}</text></svg>')
 
 
-def build_contact():
-    w, h, px, lh, bar = 900, 214, 24, 24, 34
-    rows = [
-        [("g", "❯ "), ("w", "ping joao")],
-        [("m", "PING joao (Lisbon, PT): 56 data bytes")],
-        [("v", "64 bytes from joao: "), ("g", "status=open_to_internships"), ("v", " season="), ("o", "summer_2027")],
-        [("v", "64 bytes from joao: "), ("v", "remote="), ("g", "yes"), ("v", " international="), ("g", "yes")],
-        [("m", "--- joao ping statistics: let's talk! ---")],
-    ]
-    o = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" font-family="{FONT}">',
-         "<style>text{white-space:pre;font-size:14px;fill:#c9d1d9}.g{fill:#3fb950}.w{fill:#f0f6fc;font-weight:bold}"
-         ".m{fill:#8b949e}.o{fill:#f0883e}.b{fill:#58a6ff}</style>",
-         f'<rect x="0.5" y="0.5" width="{w - 1}" height="{h - 1}" rx="10" fill="#0d1117" stroke="#30363d"/>',
-         f'<path d="M10.5 0.5 H{w - 10.5} A10 10 0 0 1 {w - 0.5} 10.5 V{bar} H0.5 V10.5 A10 10 0 0 1 10.5 0.5 Z" fill="#21262d"/>']
-    for i, col in enumerate(["#ff5f56", "#ffbd2e", "#27c93f"]):
-        o.append(f'<circle cx="{20 + i * 20}" cy="{bar / 2}" r="6" fill="{col}"/>')
-    o.append(f'<text x="{w / 2}" y="{bar / 2 + 4.5}" text-anchor="middle" style="font-size:13px;fill:#8b949e">joao@ist: ~/contact</text>')
-    y = bar + 30
-    for r in rows:
-        o.append(f'<text x="{px}" y="{y}">' + "".join(f'<tspan class="{k}">{escape(t)}</tspan>' for k, t in r) + "</text>")
-        y += lh
-    y += 14
-    o.append(ICON_MAIL(px, y - 16, 20))
-    o.append(f'<text x="{px + 30}" y="{y}" class="b">{escape(EMAIL)}</text>')
-    x2 = px + 30 + len(EMAIL) * 8.4 + 40
-    o.append(ICON_IN(x2, y - 16, 20))
-    o.append(f'<text x="{x2 + 30}" y="{y}" class="b">{escape(LINKEDIN)}</text>')
-    o.append("</svg>")
-    return "\n".join(o)
-
-
 def main():
     here = os.path.dirname(os.path.abspath(__file__))
     for name, svg in [("btn_linkedin", build_button("LinkedIn", ICON_IN)),
-                      ("btn_email", build_button("Email", ICON_MAIL)),
-                      ("card_contact", build_contact())]:
+                      ("btn_email", build_button("Email", ICON_MAIL))]:
         with open(os.path.join(here, f"{name}.svg"), "w", encoding="utf-8") as f:
             f.write(svg)
     for p in PROJECTS:

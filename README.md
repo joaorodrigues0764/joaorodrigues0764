@@ -27,10 +27,6 @@ I like understanding how things work under the hood and building software that g
   <a href="https://github.com/joaorodrigues0764/axum-notes-api"><img src="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/card_axum-notes-api.svg" alt="Axum Notes API: REST API in Rust with async request handling and PostgreSQL (Axum, SQLx, Docker)" width="49%"></a>
 </p>
 
-<p align="center">
-  <a href="mailto:joao.sousa.rodrigues@tecnico.ulisboa.pt"><img src="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/card_contact.svg" alt="ping joao: open to summer 2027 internships, remote and international. Email joao.sousa.rodrigues@tecnico.ulisboa.pt or LinkedIn. Let's talk!" width="99%"></a>
-</p>
-
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/github-snake-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/github-snake.svg">
