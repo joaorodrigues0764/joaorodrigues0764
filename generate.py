@@ -256,11 +256,57 @@ def build_button(label, icon):
             f'lengthAdjust="spacingAndGlyphs">{escape(label)}</text></svg>')
 
 
+# ===================== STACK: três cartões (stack.svg) =====================
+RED = "#FF2E43"
+STACK = [
+    ("Languages", ["Rust", "C", "C++", "Go", "Python", "Java", "TypeScript", "SQL", "RISC-V"]),
+    ("Backend & AI", ["FastAPI", "Axum", "Tokio", "SQLx", "PostgreSQL", "REST APIs", "RAG", "BM25", "Vector search"]),
+    ("Cloud & Tools", ["Cloudflare Workers", "D1", "Queues", "Docker", "Linux", "Git", "GitHub Actions", "Azure", "Next.js"]),
+]
+
+
+def build_stack():
+    cw_pill, ph, gap = 7.2, 26, 8          # largura de carácter a 12px, altura e espaço das etiquetas
+    card_w, pad, head = 296, 18, 52
+    W = len(STACK) * card_w + (len(STACK) - 1) * 16
+    # distribui as etiquetas por linhas dentro de cada cartão
+    layouts = []
+    for _, items in STACK:
+        rows, row, x = [], [], 0
+        for it in items:
+            w = len(it) * cw_pill + 20
+            if row and x + w > card_w - 2 * pad:
+                rows.append(row); row, x = [], 0
+            row.append((it, x, w)); x += w + gap
+        rows.append(row)
+        layouts.append(rows)
+    H = int(head + max(len(r) for r in layouts) * (ph + gap) + pad - gap + 6)
+    o = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" font-family="{FONT}">']
+    for i, ((title, _), rows) in enumerate(zip(STACK, layouts)):
+        x0 = i * (card_w + 16)
+        o.append(f'<clipPath id="cc{i}"><rect x="{x0}" y="0" width="{card_w}" height="{H}" rx="10"/></clipPath>')
+        o.append(f'<rect x="{x0}" y="0" width="{card_w}" height="{H}" rx="10" fill="#0d1117"/>')
+        o.append(f'<rect x="{x0}" y="0" width="{card_w}" height="4" fill="{RED}" clip-path="url(#cc{i})"/>')
+        o.append(f'<rect x="{x0 + 0.5}" y="0.5" width="{card_w - 1}" height="{H - 1}" rx="10" fill="none" stroke="#30363d"/>')
+        o.append(f'<text x="{x0 + pad}" y="38" font-size="15" font-weight="bold" fill="#f0f6fc">'
+                 f'<tspan fill="{RED}">❯ </tspan>{escape(title)}</text>')
+        for r, row in enumerate(rows):
+            y = head + r * (ph + gap)
+            for it, px, w in row:
+                o.append(f'<rect x="{x0 + pad + px}" y="{y}" width="{w}" height="{ph}" rx="6" fill="{RED}" fill-opacity="0.10" '
+                         f'stroke="{RED}" stroke-opacity="0.55"/>')
+                o.append(f'<text x="{x0 + pad + px + w / 2}" y="{y + 17.5}" font-size="12" fill="#f0f6fc" text-anchor="middle" '
+                         f'textLength="{len(it) * cw_pill}" lengthAdjust="spacingAndGlyphs">{escape(it)}</text>')
+    o.append("</svg>")
+    return "\n".join(o)
+
+
 def main():
     here = os.path.dirname(os.path.abspath(__file__))
     for name, svg in [("btn_linkedin", build_button("LinkedIn", ICON_IN)),
                       ("btn_email", build_button("Email", ICON_MAIL)),
-                      ("btn_resume", build_button("Resume", ICON_CV))]:
+                      ("btn_resume", build_button("Resume", ICON_CV)),
+                      ("stack", build_stack())]:
         with open(os.path.join(here, f"{name}.svg"), "w", encoding="utf-8") as f:
             f.write(svg)
     with open(os.path.join(here, "ascii.txt"), encoding="utf-8") as f:

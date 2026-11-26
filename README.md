@@ -13,14 +13,8 @@
 </p>
 
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=rust,c,cpp,go,py,java,ts,postgres,fastapi,cloudflare,docker,linux,git&theme=dark" alt="Rust, C, C++, Go, Python, Java, TypeScript, PostgreSQL, FastAPI, Cloudflare, Docker, Linux, Git">
+  <img src="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/stack.svg?v=2" alt="Tech stack. Languages: Rust, C, C++, Go, Python, Java, TypeScript, SQL, RISC-V. Backend and AI: FastAPI, Axum, Tokio, SQLx, PostgreSQL, REST APIs, RAG, BM25, vector search. Cloud and tools: Cloudflare Workers, D1, Queues, Docker, Linux, Git, GitHub Actions, Azure, Next.js." width="100%">
 </p>
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/profile-red-dark.svg?v=2">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/profile-red-light.svg?v=2">
-  <img alt="3D contribution graph for the last year, with top languages and activity overview" src="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/profile-red-dark.svg?v=2" width="100%">
-</picture>
 
 <details>
 <summary><code>❯ cat .secret</code></summary>
