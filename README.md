@@ -25,12 +25,6 @@ tools   = ["git", "linux", "docker", "github"]
 spoken  = ["portuguese", "english"]
 ```
 
-### `❯ cargo build --release`
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/cargo_build.svg" alt="Animated terminal running cargo build: compiling Rust, C, C++, Go, Python, Java, TypeScript, FastAPI, Axum, PostgreSQL, Cloudflare Workers, Docker and Linux" width="100%">
-</p>
-
 <p align="center">
   <img src="https://skillicons.dev/icons?i=rust,c,cpp,go,py,java,ts,postgres,fastapi,cloudflare,docker,linux,git&theme=dark" alt="Rust, C, C++, Go, Python, Java, TypeScript, PostgreSQL, FastAPI, Cloudflare, Docker, Linux, Git">
 </p>

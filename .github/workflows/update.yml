@@ -35,7 +35,7 @@ jobs:
             snake/github-snake-dark.svg?palette=github-dark
       - name: Publish to output branch
         run: |
-          mkdir out && cp dark_mode.svg light_mode.svg cargo_build.svg snake/*.svg out/
+          mkdir out && cp dark_mode.svg light_mode.svg snake/*.svg out/
           cd out
           git init -q -b output
           git config user.name "github-actions[bot]"
