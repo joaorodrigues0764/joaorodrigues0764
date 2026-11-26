@@ -229,20 +229,20 @@ def build(theme, art_lines, values):
 # ===================== CONTACTO: botões (topo) =====================
 EMAIL = "joao.sousa.rodrigues@tecnico.ulisboa.pt"
 LINKEDIN = "linkedin.com/in/joão-rodrigues-9b02562b1"
-ICON_IN = lambda x, y, s: (f'<rect x="{x}" y="{y}" width="{s}" height="{s}" rx="4" fill="#39D353"/>'
+ICON_IN = lambda x, y, s: (f'<rect x="{x}" y="{y}" width="{s}" height="{s}" rx="4" fill="#0A66C2"/>'
                            f'<text x="{x + s / 2}" y="{y + s * 0.76}" font-size="{s * 0.62}" font-weight="bold" '
                            f'fill="#fff" text-anchor="middle" font-family="Arial, Helvetica, sans-serif">in</text>')
 ICON_MAIL = lambda x, y, s: (f'<rect x="{x + 0.75}" y="{y + s * 0.18}" width="{s - 1.5}" height="{s * 0.64}" rx="3" '
-                             f'fill="none" stroke="#39D353" stroke-width="1.8"/>'
+                             f'fill="none" stroke="#EA4335" stroke-width="1.8"/>'
                              f'<path d="M{x + 2} {y + s * 0.24} L{x + s / 2} {y + s * 0.56} L{x + s - 2} {y + s * 0.24}" '
-                             f'fill="none" stroke="#39D353" stroke-width="1.8" stroke-linejoin="round"/>')
+                             f'fill="none" stroke="#EA4335" stroke-width="1.8" stroke-linejoin="round"/>')
 # Documento com o canto dobrado e linhas de texto (botão do CV)
 ICON_CV = lambda x, y, s: (f'<path d="M{x + s * 0.18} {y + 1} H{x + s * 0.62} L{x + s * 0.84} {y + s * 0.24} V{y + s - 1} '
-                           f'H{x + s * 0.18} Z" fill="none" stroke="#39D353" stroke-width="1.8" stroke-linejoin="round"/>'
-                           f'<path d="M{x + s * 0.62} {y + 1} V{y + s * 0.24} H{x + s * 0.84}" fill="none" stroke="#39D353" '
+                           f'H{x + s * 0.18} Z" fill="none" stroke="#3FB950" stroke-width="1.8" stroke-linejoin="round"/>'
+                           f'<path d="M{x + s * 0.62} {y + 1} V{y + s * 0.24} H{x + s * 0.84}" fill="none" stroke="#3FB950" '
                            f'stroke-width="1.8" stroke-linejoin="round"/>'
                            + "".join(f'<line x1="{x + s * 0.32}" y1="{y + s * f}" x2="{x + s * 0.70}" y2="{y + s * f}" '
-                                     f'stroke="#39D353" stroke-width="1.6" stroke-linecap="round"/>' for f in (0.48, 0.64, 0.80)))
+                                     f'stroke="#3FB950" stroke-width="1.6" stroke-linecap="round"/>' for f in (0.48, 0.64, 0.80)))
 
 
 def build_button(label, icon):
