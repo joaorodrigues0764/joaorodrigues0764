@@ -17,16 +17,6 @@ I like understanding how things work under the hood and building software that g
   <img src="https://skillicons.dev/icons?i=rust,c,cpp,go,py,java,ts,postgres,fastapi,cloudflare,docker,linux,git&theme=dark" alt="Rust, C, C++, Go, Python, Java, TypeScript, PostgreSQL, FastAPI, Cloudflare, Docker, Linux, Git">
 </p>
 
-### `❯ ls ~/projects --featured`
-
-<p align="center">
-  <a href="https://github.com/joaorodrigues0764/ainnovation-hackathon-winner"><img src="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/card_caixa-explica.svg" alt="Caixa Explica: AI-powered financial literacy assistant, hackathon winner (Python, FastAPI, Next.js, RAG)" width="49%"></a>
-  <a href="https://github.com/joaorodrigues0764/edgeguard"><img src="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/card_edgeguard.svg" alt="EdgeGuard: serverless monitoring and incident detection API on Cloudflare (TypeScript, Workers, D1, Queues)" width="49%"></a>
-</p>
-<p align="center">
-  <a href="https://github.com/joaorodrigues0764/axum-notes-api"><img src="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/card_axum-notes-api.svg" alt="Axum Notes API: REST API in Rust with async request handling and PostgreSQL (Axum, SQLx, Docker)" width="49%"></a>
-</p>
-
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/github-snake-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/github-snake.svg">
