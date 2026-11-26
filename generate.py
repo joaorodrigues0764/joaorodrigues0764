@@ -226,8 +226,65 @@ def build(theme, art_lines, values):
     return "\n".join(out)
 
 
+# ===================== CARTÕES DE PROJETOS =====================
+# Um SVG por projeto (card_<slug>.svg). No README cada cartão é um link para o repositório.
+PROJECTS = [
+    dict(slug="caixa-explica", name="Caixa Explica", badge="★ Hackathon winner",
+         desc=["AI-powered financial literacy assistant that makes",
+               "financial information easier to understand."],
+         tags=["FastAPI", "Next.js", "RAG"], lang=("Python", "#3572A5")),
+    dict(slug="edgeguard", name="EdgeGuard", badge=None,
+         desc=["Serverless monitoring and incident detection API",
+               "running on Cloudflare's edge."],
+         tags=["Workers", "D1", "Queues"], lang=("TypeScript", "#3178c6")),
+    dict(slug="axum-notes-api", name="Axum Notes API", badge=None,
+         desc=["REST API with async request handling",
+               "and PostgreSQL persistence."],
+         tags=["Axum", "SQLx", "PostgreSQL", "Docker"], lang=("Rust", "#dea584")),
+]
+REPO_ICON = ("M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7"
+             ".75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1"
+             " .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z")
+
+
+def build_card(p):
+    w, h, px = 440, 170, 22
+    cw = 7.2  # largura de um carácter a 12px (forçada com textLength)
+    o = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" font-family="{FONT}">',
+         '<style>text{white-space:pre}</style>',
+         f'<rect x="0.5" y="0.5" width="{w - 1}" height="{h - 1}" rx="10" fill="#0d1117" stroke="#30363d"/>',
+         f'<path transform="translate({px} 22)" fill="#8b949e" d="{REPO_ICON}"/>',
+         f'<text x="{px + 24}" y="35" font-size="17" font-weight="bold" fill="#58a6ff">{escape(p["name"])}</text>']
+    if p["badge"]:
+        bw = len(p["badge"]) * cw + 18
+        o.append(f'<rect x="{w - px - bw}" y="19" width="{bw}" height="22" rx="11" fill="none" stroke="#d29922"/>')
+        o.append(f'<text x="{w - px - bw / 2}" y="34" font-size="12" fill="#d29922" text-anchor="middle" '
+                 f'textLength="{len(p["badge"]) * cw}" lengthAdjust="spacingAndGlyphs">{escape(p["badge"])}</text>')
+    for i, line in enumerate(p["desc"]):
+        o.append(f'<text x="{px}" y="{68 + i * 20}" font-size="13" fill="#c9d1d9">{escape(line)}</text>')
+    # etiquetas (tags)
+    x = px
+    for t in p["tags"]:
+        tw = len(t) * cw + 18
+        o.append(f'<rect x="{x}" y="{h - 42}" width="{tw}" height="22" rx="11" fill="#1f6feb26"/>')
+        o.append(f'<text x="{x + tw / 2}" y="{h - 27}" font-size="12" fill="#58a6ff" text-anchor="middle" '
+                 f'textLength="{len(t) * cw}" lengthAdjust="spacingAndGlyphs">{escape(t)}</text>')
+        x += tw + 8
+    # linguagem principal (canto inferior direito)
+    lang, col = p["lang"]
+    lx = w - px - len(lang) * cw
+    o.append(f'<circle cx="{lx - 10}" cy="{h - 31}" r="6" fill="{col}"/>')
+    o.append(f'<text x="{lx}" y="{h - 27}" font-size="12" fill="#8b949e" textLength="{len(lang) * cw}" '
+             f'lengthAdjust="spacingAndGlyphs">{escape(lang)}</text>')
+    o.append("</svg>")
+    return "\n".join(o)
+
+
 def main():
     here = os.path.dirname(os.path.abspath(__file__))
+    for p in PROJECTS:
+        with open(os.path.join(here, f"card_{p['slug']}.svg"), "w", encoding="utf-8") as f:
+            f.write(build_card(p))
     with open(os.path.join(here, "ascii.txt"), encoding="utf-8") as f:
         art = f.read().rstrip("\n").split("\n")
     stats = github_stats()
