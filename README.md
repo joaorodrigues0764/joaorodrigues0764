@@ -2,7 +2,7 @@
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/dark_mode.svg">
     <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/light_mode.svg">
-    <img alt="João Rodrigues — ASCII portrait next to a terminal running cargo run: Computer Science & Engineering at IST, backend, systems, cloud and AI, 1st place at AInnovation Hackathon 2026, open to summer 2027 internships" src="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/dark_mode.svg">
+    <img alt="João Rodrigues — ASCII portrait next to a terminal: Computer Science &amp; Engineering at Instituto Superior Técnico, Lisbon; backend, systems, cloud and AI; 1st place at AInnovation Hackathon 2026; open to summer 2027 internships" src="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/dark_mode.svg">
   </picture>
 </p>
 

@@ -24,35 +24,28 @@ BIRTHDAY = date(2000, 1, 1)  # usado pelo placeholder "{uptime}" (não usado de 
 # Cada linha é uma lista de (classe, texto). Classes: g=verde, y=amarelo, b=azul,
 # w=branco forte, m=cinzento, o=laranja, r=cor de Rust, v=normal. [] = linha vazia.
 # Placeholders disponíveis: {repos} {stars} {followers} {commits}
-COMMAND = "cargo run --release --bin joao"
+COMMAND = "whoami"
+K = lambda k: ("b", f"{k:<10}")  # coluna das chaves
 LINES = [
-    [("g", "   Compiling"), ("v", " ist-cse v1.0.0 "), ("m", "(Instituto Superior Técnico)")],
-    [("g", "   Compiling"), ("v", " systems v0.7.0 "), ("m", "(rust, c, c++, go, risc-v)")],
-    [("g", "   Compiling"), ("v", " backend v0.9.0 "), ("m", "(fastapi, axum, postgresql)")],
-    [("g", "   Compiling"), ("v", " cloud v0.8.0 "), ("m", "(cf workers, docker, linux)")],
-    [("g", "   Compiling"), ("v", " ai v0.6.0 "), ("m", "(python, rag, llms)")],
+    [("o", "João Rodrigues")],
+    [("m", "─" * 44)],
+    [K("Study"), ("v", "Computer Science & Engineering")],
+    [K("Uni"), ("v", "Instituto Superior Técnico")],
+    [K("Location"), ("v", "Lisbon, Portugal")],
+    [K("Focus"), ("v", "Backend · Systems · Cloud · AI")],
+    [K("Learning"), ("v", "Rust")],
+    [K("Speaks"), ("v", "Portuguese, English")],
     [],
-    [("y", "warning"), ("w", ": `rust_skills` is still being improved")],
-    [("b", "  -->"), ("v", " src/joao.rs:2026:11")],
-    [("b", "   ="), ("w", " note"), ("v", ": this is intentional, keep shipping")],
+    [K("Award"), ("r", "★ "), ("v", "1st place · AInnovation Hackathon 2026")],
+    [K("Status"), ("g", "● "), ("v", "Open to summer 2027 internships")],
     [],
-    [("g", "    Finished"), ("v", " `release` profile [optimized]"), ("m", "{stats}")],
-    [("g", "     Running"), ("v", " `target/release/joao`")],
-    [],
-    [("o", "Hi, I'm João Rodrigues!")],
-    [("v", "Backend, systems, cloud & AI @ IST Lisbon.")],
-    [],
-    [("r", "★"), ("v", " 1st place · AInnovation Hackathon 2026")],
-    [("m", "  └─ Caixa Explica, AI for financial literacy")],
-    [("g", "●"), ("v", " Open to summer 2027 internships")],
-    [],
-    [("m", "✉ "), ("b", "joao.sousa.rodrigues@tecnico.ulisboa.pt")],
-    [("m", "in "), ("b", "linkedin.com/in/joão-rodrigues-9b02562b1")],
+    [K("Email"), ("v", "joao.sousa.rodrigues@tecnico.ulisboa.pt")],
+    [K("LinkedIn"), ("v", "in/joão-rodrigues-9b02562b1")],
 ]
 TITLE = "joao@ist: ~/profile"
 
 # Animação
-ROW_TIME = 0.045      # segundos que o cursor demora a varrer cada linha
+ROW_TIME = 0.09       # segundos que o cursor demora a varrer cada linha
 START_DELAY = 0.4     # pausa antes de começar
 # ====================================================================
 
@@ -66,7 +59,7 @@ TERM = dict(bg="#0d1117", bar="#21262d", text="#c9d1d9", title="#8b949e")
 # Geometria da arte (forçada com textLength, por isso não depende da fonte)
 ART_FS, ART_CW, ART_LH = 7.8, 4.7, 8.9
 PAD = 20
-INFO_FS, INFO_CW, INFO_LH = 15.0, 9.0, 25.0
+INFO_FS, INFO_CW, INFO_LH = 15.0, 9.0, 31.0
 INFO_COLS = 60
 BAR_H = 36
 FONT = "ConsolasFallback, Consolas, 'DejaVu Sans Mono', Menlo, 'Courier New', monospace"
