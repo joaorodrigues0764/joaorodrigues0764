@@ -9,6 +9,7 @@
 <p align="center">
   <a href="https://www.linkedin.com/in/jo%C3%A3o-rodrigues-9b02562b1"><img src="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/btn_linkedin.svg" alt="LinkedIn" height="44"></a>
   <a href="mailto:joao.sousa.rodrigues@tecnico.ulisboa.pt"><img src="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/btn_email.svg" alt="Email" height="44"></a>
+  <a href="https://github.com/joaorodrigues0764/joaorodrigues0764/blob/main/Joao_Rodrigues_CV.pdf"><img src="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/btn_resume.svg" alt="Resume (PDF)" height="44"></a>
 </p>
 
 <p align="center">
