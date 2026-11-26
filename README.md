@@ -2,7 +2,7 @@
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/dark_mode.svg">
     <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/light_mode.svg">
-    <img alt="João Rodrigues — ASCII portrait next to a terminal: Computer Science &amp; Engineering at Instituto Superior Técnico, Lisbon; backend, systems, cloud and AI; 1st place at AInnovation Hackathon 2026; open to summer 2027 internships" src="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/dark_mode.svg">
+    <img alt="João Rodrigues — ASCII portrait next to a terminal: Computer Science &amp; Engineering at Instituto Superior Técnico, Lisbon; backend, systems, cloud and AI; 1st place at a 2026 hackathon; open to summer 2027 internships" src="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/dark_mode.svg">
   </picture>
 </p>
 
@@ -36,15 +36,6 @@ spoken  = ["portuguese", "english"]
 | 🏆 [Caixa Explica](https://github.com/joaorodrigues0764/ainnovation-hackathon-winner) | AI financial literacy assistant. **1st place, AInnovation Hackathon 2026** | Python · FastAPI · Next.js · RAG |
 | ⚡ [EdgeGuard](https://github.com/joaorodrigues0764/edgeguard) | Serverless monitoring and incident detection API on Cloudflare's edge | TypeScript · Workers · D1 · Queues |
 | 🦀 Axum Notes API | Async REST API with PostgreSQL | Rust · Axum · SQLx · Docker |
-
-### `❯ git log --oneline --graph`
-
-```diff
-* (HEAD -> main)  feat: open to summer 2027 internships, let's talk!
-* 3f9a2c1         feat: 1st place @ AInnovation Hackathon 2026 (Caixa Explica)
-* b72e0d4         chore: improving Rust skills (in progress, never done)
-* 0a1b2c3         init: Computer Science & Engineering @ Instituto Superior Técnico
-```
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/joaorodrigues0764/joaorodrigues0764/output/github-snake-dark.svg">

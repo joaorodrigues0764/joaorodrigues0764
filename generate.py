@@ -36,7 +36,7 @@ LINES = [
     [K("Learning"), ("v", "Rust")],
     [K("Speaks"), ("v", "Portuguese, English")],
     [],
-    [K("Award"), ("r", "★ "), ("v", "1st place · AInnovation Hackathon 2026")],
+    [K("Award"), ("r", "★ "), ("v", "1st place · Hackathon 2026")],
     [K("Status"), ("g", "● "), ("v", "Open to summer 2027 internships")],
     [],
     [K("Email"), ("v", "joao.sousa.rodrigues@tecnico.ulisboa.pt")],
