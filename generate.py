@@ -46,8 +46,8 @@ LINES = [
 TITLE = "joao@ist: ~/profile"
 
 # Animação
-ROW_TIME = 0.1        # segundos que o cursor demora a varrer cada linha
-START_DELAY = 0.9     # pausa antes de começar (deixa a página do GitHub acabar de carregar)
+ROW_TIME = 0.09       # segundos que o cursor demora a varrer cada linha
+START_DELAY = 0.4     # pausa antes de começar
 # ====================================================================
 
 THEMES = {
@@ -138,10 +138,8 @@ def build(theme, art_lines, values):
 </style>""")
     out.append(f'<rect width="{width}" height="{height}" rx="15" fill="{c["bg"]}"/>')
 
-    # ---- arte ASCII: texto estático, revelado por uma "cortina" da cor do fundo ----
-    # A cortina tem duas partes: uma faixa na linha atual, que desliza para a direita com o cursor,
-    # e um bloco que tapa as linhas de baixo. Só se animam transforms (o browser passa-os à GPU).
-    rows = []  # (topo da linha, x inicial, x final, instante de início)
+    # ---- arte ASCII + clips animados ----
+    defs, texts, cursor_pts = [], [], []
     for i, line in enumerate(art_lines):
         y = PAD + (i + 1) * ART_LH
         content = line.rstrip()
@@ -149,39 +147,22 @@ def build(theme, art_lines, values):
         content = content.strip(" ")
         x0 = PAD + lead * ART_CW
         x1 = x0 + len(content) * ART_CW
+        t0 = START_DELAY + i * ROW_TIME
         if content:
-            out.append(f'<text class="art" x="{x0:.1f}" y="{y - 1.5:.1f}" textLength="{len(content) * ART_CW:.1f}" '
-                       f'lengthAdjust="spacingAndGlyphs">{escape(content)}</text>')
-        rows.append((y - ART_LH, x0, x1, START_DELAY + i * ROW_TIME))
+            defs.append(
+                f'<clipPath id="c{i}"><rect x="{x0:.1f}" y="{y - ART_LH:.1f}" width="0" height="{ART_LH + 1}">'
+                f'<animate attributeName="width" from="0" to="{x1 - x0 + 2:.1f}" begin="{t0:.3f}s" '
+                f'dur="{ROW_TIME:.3f}s" fill="freeze"/></rect></clipPath>')
+            texts.append(
+                f'<text class="art" x="{x0:.1f}" y="{y - 1.5:.1f}" textLength="{len(content) * ART_CW:.1f}" '
+                f'lengthAdjust="spacingAndGlyphs" clip-path="url(#c{i})">{escape(content)}</text>')
+        else:
+            x1 = x0
+        cursor_pts.append((t0, x0, y - ART_LH / 2))
+        cursor_pts.append((t0 + ROW_TIME * 0.98, x1, y - ART_LH / 2))
 
-    D = rows[-1][3] + ROW_TIME + 0.2   # duração total da animação da arte
-    eps = 0.001                        # salto "instantâneo" entre linhas
-    pct = lambda t: f"{min(max(t / D * 100, 0), 100):.4f}%"
-    k_rowy, k_rowx, k_cur = [f"0% {{ transform:translateY({rows[0][0]:.1f}px); }}"], \
-        [f"0% {{ transform:translateX({rows[0][1] + 1:.1f}px); }}"], \
-        [f"0% {{ transform:translate({rows[0][1]:.1f}px,{rows[0][0] + ART_LH / 2:.1f}px); }}"]
-    for top, x0, x1, t0 in rows:
-        t1 = t0 + ROW_TIME - eps
-        k_rowy.append(f"{pct(t0)} {{ transform:translateY({top:.1f}px); }}")
-        k_rowx.append(f"{pct(t0)} {{ transform:translateX({x0 + 1:.1f}px); }}")
-        k_rowx.append(f"{pct(t1)} {{ transform:translateX({x1 + 1:.1f}px); }}")
-        k_cur.append(f"{pct(t0)} {{ transform:translate({x0:.1f}px,{top + ART_LH / 2:.1f}px); }}")
-        k_cur.append(f"{pct(t1)} {{ transform:translate({x1:.1f}px,{top + ART_LH / 2:.1f}px); }}")
-    k_rowy.append(f"{pct(rows[-1][3] + ROW_TIME)} {{ transform:translateY({height + 50}px); }}")
-    k_rowy.append(f"100% {{ transform:translateY({height + 50}px); }}")
-    out.append("<style>"
-               f"@keyframes rowy {{ {' '.join(k_rowy)} }} @keyframes rowx {{ {' '.join(k_rowx)} }} "
-               f"@keyframes cur {{ {' '.join(k_cur)} }} "
-               f".rowy {{ animation: rowy {D:.3f}s step-end forwards; will-change: transform; }} "
-               f".rowx {{ animation: rowx {D:.3f}s linear forwards; will-change: transform; }} "
-               f".cur {{ animation: cur {D:.3f}s linear forwards; will-change: transform; }}"
-               "</style>")
-    art_right = panel_x - 12
-    out.append(f'<clipPath id="artarea"><rect x="{PAD - 6}" y="0" width="{art_right - PAD + 6:.1f}" height="{height}"/></clipPath>')
-    out.append(f'<g clip-path="url(#artarea)"><g class="rowy">'
-               f'<g class="rowx"><rect x="0" y="0" width="{art_w + 40:.1f}" height="{ART_LH:.1f}" fill="{c["bg"]}"/></g>'
-               f'<rect x="{PAD - 6}" y="{ART_LH:.1f}" width="{art_right - PAD + 6:.1f}" height="{art_h + PAD:.1f}" fill="{c["bg"]}"/>'
-               f'</g></g>')
+    out.append("<defs>" + "".join(defs) + "</defs>")
+    out.extend(texts)
 
     # ---- terminal "cargo run" ----
     ph = height - 2 * PAD
@@ -230,10 +211,17 @@ def build(theme, art_lines, values):
     out.append(f'<rect style="opacity:0;animation:on .01s {delay:.2f}s forwards, blink 1s step-end {delay + 0.5:.2f}s infinite" x="{text_x + 2 * INFO_CW:.1f}" y="{y - INFO_LH * 0.72:.1f}" '
                f'width="{INFO_CW:.1f}" height="{INFO_LH * 0.85:.1f}" fill="{TERM["text"]}"/>')
 
-    # ---- cursor de terminal (bloco), segue a ponta da cortina ----
-    out.append(f'<g id="cursor"><g class="cur">'
-               f'<rect x="1" y="-7" width="8" height="14" fill="{c["cursor_fill"]}"/>'
-               f'</g></g>')
+    # ---- cursor de terminal (bloco) ----
+    dur = cursor_pts[-1][0] + 0.2
+    first = cursor_pts[0]
+    pts = [(0.0, first[1], first[2])] + cursor_pts + [(dur, cursor_pts[-1][1], cursor_pts[-1][2])]
+    key_times = ";".join(f"{min(t / dur, 1):.5f}" for t, _, _ in pts)
+    values_ = ";".join(f"{x:.1f} {yy:.1f}" for _, x, yy in pts)
+    out.append(
+        f'<g id="cursor"><g><animateTransform attributeName="transform" type="translate" '
+        f'values="{values_}" keyTimes="{key_times}" dur="{dur:.3f}s" fill="freeze"/>'
+        f'<rect x="1" y="-7" width="8" height="14" fill="{c["cursor_fill"]}"/>'
+        f'</g></g>')
     out.append("</svg>")
     return "\n".join(out)
 
